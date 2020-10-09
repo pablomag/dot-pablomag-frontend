@@ -1,0 +1,26 @@
+.comments {
+    border-top: 0.1em solid var(--clr-accent);
+    margin: 2em 0 8em;
+
+    h1 {
+        margin: 1em 0 -1em;
+        line-height: 2.5em;
+        @include font(var(--ff-side), $fs-h5, var(--clr-dark));
+    }
+
+    p {
+        @include font(var(--ff-notes), $fs-small, var(--clr-accent-dark));
+    }
+
+    @media (min-width: $breakpoint-mobile) {
+        margin: 2em 0 8em;
+
+        h1 {
+            @include font(var(--ff-side), $fs-h4, var(--clr-dark));
+        }
+
+        p {
+            @include font(var(--ff-notes), $fs-small, var(--clr-accent-dark));
+        }
+    }
+}

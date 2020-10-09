@@ -1,0 +1,16 @@
+.hero {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    height: 22em;
+
+    img {
+        object-fit: cover;
+        object-position: top center;
+        width: 100%;
+    }
+
+    @media (min-width: $breakpoint-mobile) {
+        height: 26em;
+    }
+}

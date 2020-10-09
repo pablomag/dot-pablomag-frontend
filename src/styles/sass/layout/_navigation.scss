@@ -1,0 +1,27 @@
+.burger-wrapper {
+    position: fixed;
+    top: 1.5em;
+    left: 1.7em;
+    background-color: transparent;
+    z-index: 2;
+
+    .burger {
+        position: sticky;
+        color: var(--clr-light);
+        background-color: var(--clr-dark);
+        padding: 0.2em 0.6em 0.1em 0.6em;
+        border-radius: 0.2em;
+
+        @media (max-width: $breakpoint-mobile) {
+            @include burger--show();
+        }
+    }
+}
+
+.main-navigation {
+    @include burger--hide();
+
+    @media (min-width: $breakpoint-mobile) {
+        @include burger--show();
+    }
+}

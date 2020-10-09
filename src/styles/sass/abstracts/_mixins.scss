@@ -1,0 +1,63 @@
+@mixin font(
+    $font-family: var(--ff-body),
+    $font-size: $fs-base,
+    $color: var(--clr-dark)
+) {
+    font: {
+        family: $font-family;
+        size: $font-size;
+    }
+    color: $color;
+}
+
+@mixin post-title--base($line-height, $letter-spacing, $font-size) {
+    text-align: center;
+    line-height: $line-height;
+    letter-spacing: $letter-spacing;
+    @include font(var(--ff-title), $font-size, var(--clr-dark));
+}
+
+@mixin post-title--big() {
+    @include post-title--base(1.25em, 0.005em, $fs-h1);
+}
+
+@mixin post-title--small() {
+    @include post-title--base(1.25em, 0, $fs-h3);
+}
+
+@mixin post-title--tiny() {
+    @include post-title--base(1.8em, 0, $fs-h5);
+}
+
+@mixin element--base($opacity, $font-size, $top, $left) {
+    opacity: $opacity;
+    font-size: $font-size;
+    margin-top: $top;
+    margin-left: $left;
+}
+
+@mixin element--big() {
+    @include element--base(0, $fs-h1, -3em, -3em);
+}
+
+@mixin element--small() {
+    @include element--base(0, $fs-xs, -3em, 0);
+}
+
+@mixin element--normal() {
+    @include element--base(1, $fs-big, 0, 0);
+}
+
+@mixin burger--hide() {
+    opacity: 0;
+    cursor: default;
+    user-select: none;
+    pointer-events: none;
+    animation: fade-out 200ms ease-in !important;
+}
+
+@mixin burger--show() {
+    opacity: 1;
+    cursor: pointer;
+    animation: fade-in 400ms ease-out !important;
+}

@@ -1,0 +1,88 @@
+#root {
+    min-width: $breakpoint-minimum;
+    display: grid;
+    grid-template-rows: auto auto 11em;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "header"
+        "main"
+        "footer";
+
+    @media (min-width: $breakpoint-mobile) {
+        grid-template-columns: 1fr 2fr 6fr 2fr 1fr;
+        grid-template-areas:
+            "header header header header header"
+            "main main main main main"
+            "footer footer footer footer footer";
+    }
+}
+
+header {
+    grid-area: header;
+}
+
+main {
+    width: 100%;
+    grid-area: main;
+}
+
+footer {
+    grid-area: footer;
+}
+
+.post {
+    display: grid;
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "hero"
+        "sticky-title"
+        "left-sidebar"
+        "post-content"
+        "right-sidebar"
+        "comments";
+
+    @media (min-width: $breakpoint-mobile) {
+        grid-template-rows: auto auto auto auto;
+        grid-template-columns: 1fr 2fr 6fr 2fr 1fr;
+        grid-template-areas:
+            "hero hero hero hero hero"
+            "sticky-title sticky-title sticky-title sticky-title sticky-title"
+            ". left-sidebar post-content right-sidebar ."
+            ". . comments . .";
+    }
+}
+
+.hero {
+    grid-area: hero;
+}
+
+.right-sidebar {
+    grid-area: right-sidebar;
+}
+
+.left-sidebar {
+    grid-area: left-sidebar;
+}
+
+.sticky-title {
+    grid-area: sticky-title;
+}
+
+.post-content {
+    grid-area: post-content;
+    padding: 0 1.5em;
+
+    @media (min-width: $breakpoint-mobile) {
+        padding: 0;
+    }
+}
+
+.comments {
+    grid-area: comments;
+    padding: 0 1.5em;
+
+    @media (min-width: $breakpoint-mobile) {
+        padding: 0;
+    }
+}

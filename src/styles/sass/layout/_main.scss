@@ -1,0 +1,4 @@
+body,
+main {
+    @include font(var(--ff-body), $fs-base, var(--clr-dark));
+}

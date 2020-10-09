@@ -1,0 +1,83 @@
+footer {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-dark);
+    height: 12em;
+    padding: 0.5em 0;
+
+    .first-paragraph {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        padding: 2em 0;
+
+        @media (min-width: $breakpoint-mobile) {
+            padding: 2em 0 3em;
+        }
+    }
+
+    .second-paragraph {
+        display: flex;
+        position: relative;
+        flex-direction: column-reverse;
+        justify-content: center;
+        bottom: 0;
+        padding: 0;
+        margin: 0 auto;
+
+        @media (min-width: $breakpoint-mobile) {
+            bottom: -1em;
+            flex-direction: row-reverse;
+        }
+    }
+
+    .icons {
+        margin: 0;
+        padding: 0;
+        color: var(--clr-light);
+        font-size: $fs-h4;
+        display: inline-flex;
+
+        .fab {
+            padding: 0 0.3em;
+        }
+    }
+
+    .powered-by {
+        margin: 0;
+        padding: 0;
+        display: inline-flex;
+        @include font(var(--ff-side), $fs-xs, var(--clr-light));
+
+        p {
+            position: relative;
+            top: -0.4em;
+        }
+    }
+
+    .copyright {
+        display: flex;
+        margin: 0 2em;
+        text-align: center;
+        justify-content: center;
+        @include font(var(--ff-side), $fs-xxs, var(--clr-accent-dark));
+
+        @media (min-width: $breakpoint-mobile) {
+            display: inline-flex;
+            width: 100%;
+        }
+    }
+
+    .terms-of-service {
+        display: flex;
+        margin: 0 2em;
+        text-align: center;
+        justify-content: center;
+        @include font(var(--ff-side), $fs-xxs, var(--clr-accent-dark));
+
+        @media (min-width: $breakpoint-mobile) {
+            display: inline-flex;
+            width: 100%;
+        }
+    }
+}
