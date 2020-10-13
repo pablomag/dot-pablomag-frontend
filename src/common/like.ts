@@ -5,10 +5,6 @@ export async function like(data: any) {
     try {
         return await getIp().then((ip) => {
             return new Promise((resolve, reject) => {
-                console.log(
-                    `Liking post: ${data.title} id: ${data._id} from ${ip}`
-                );
-
                 const url = `${API_URL}/post/like/${data._id}`;
 
                 fetch(url, {
@@ -22,12 +18,12 @@ export async function like(data: any) {
                     .then((json) => {
                         resolve(json);
                     })
-                    .catch((err) => {
-                        reject(`Error: ${err}`);
+                    .catch((error) => {
+                        reject(`Error: ${error}`);
                     });
             });
         });
-    } catch (err) {
-        return `Error: ${err}`;
+    } catch (error) {
+        return `Error: ${error}`;
     }
 }

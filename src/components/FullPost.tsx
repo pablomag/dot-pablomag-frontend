@@ -13,7 +13,7 @@ import { IMG_SERVICE_URL } from "../constants";
 import { updateCommentCount } from "../services/postService";
 
 const comment = (slug: string) => {
-    console.log(slug);
+    console.log(`[Feature temporarily disabled] Add comment to post: ${slug}`);
     const element = document.querySelector(".disqus-comment-count");
     const options: ScrollIntoViewOptions = {
         block: "start",
@@ -29,14 +29,13 @@ const handleLike = (post: any) => {
     try {
         like(post).then((response: any) => {
             if (response.status === "success") {
-                const like = document.querySelector(".sidebar-icon-like");
                 const likeCount = document.querySelector(".likes-count");
-
-                like!.classList.add("liked");
 
                 post.likes = post.likes + 1;
 
                 likeCount!.innerHTML = post.likes;
+
+                setLike(true);
             }
         });
     } catch (err) {
@@ -44,12 +43,19 @@ const handleLike = (post: any) => {
     }
 };
 
+const setLike = (liked: boolean) => {
+    const like = document.querySelector(".sidebar-icon-like");
+    if (liked) {
+        like!.classList.add("liked");
+    }
+}
+
 const addToBookmark = (slug: string) => {
-    console.log(`Adding to bookmark: ${slug}`);
+    console.log(`[Feature not yet implemented] Adding to bookmark: ${slug}`);
 };
 
 const shareToTwitter = (slug: string) => {
-    console.log(`Sharing to twitter: ${slug}`);
+    console.log(`[Feature not yet implemented] Sharing to twitter: ${slug}`);
 };
 
 const shareToFacebook = (slug: string) => {
@@ -66,10 +72,10 @@ const shareToFacebook = (slug: string) => {
         "Facebook share",
         "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=700,width=600"
     );
-    console.log(`Sharing to facebook: ${facebookUrl}`);
+    console.log(`[Feature is experimental] Sharing to facebook: ${facebookUrl}`);
 };
 
-const syncCommentCount = (post: any) => {
+const syncCommentCount = ({ post } :any) => {
     const element = document.querySelector(".disqus-comment-count");
 
     let comments = "";
@@ -102,13 +108,13 @@ const initializePost = (post: any) => {
     initializeCodeCopy();
 };
 
-const FullPost = (props: any) => {
-    console.log(props);
-    const { data: post } = props;
+const FullPost = ({ data }: any) => {
+    const { post, liked } = data;
 
     useEffect(() => {
         initializePost(post);
-    }, [post]);
+        setLike(liked);
+    }, [post, liked]);
 
     return (
         <div className="post">
@@ -139,7 +145,7 @@ const FullPost = (props: any) => {
                 <h1>Comments</h1>
                 <p>Comments are temporarily disabled</p>
                 {/* 
-					// Comments disabled momentarily
+					// Comments disabled temporarily
 					<Comments data={post}></Comments>
 				*/}
             </div>
@@ -163,6 +169,7 @@ const FullPost = (props: any) => {
                             <img
                                 src={post.author.picture}
                                 alt={post.author.name}
+                                referrerPolicy="no-referrer"
                             />
                         </div>
                         <p className="hero-name">{post.author.name}</p>
