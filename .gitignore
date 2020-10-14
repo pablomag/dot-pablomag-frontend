@@ -1,6 +1,7 @@
 /node_modules
 /config/default.json
 /dist
+/build
 .idea
 .env
 **/*.log
