@@ -30,6 +30,6 @@ jobs:
             sudo bash -c "echo APP_PORT=${{ secrets.APP_PORT }} >> .env"
             sudo bash -c "echo API_URL=${{ secrets.API_URL }} >> .env"
             sudo bash -c "echo IMG_SERVICE_URL=${{ secrets.IMG_SERVICE_URL }} >> .env"
-            sudo pm2 start pm2.config.js
-            sudo pm2 startup systemd -u ${{ secrets.SSH_USER }}
-            sudo pm2 save
+            pm2 start pm2.config.js
+            pm2 startup systemd -u ${{ secrets.SSH_USER }}
+            pm2 save

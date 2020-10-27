@@ -27,4 +27,4 @@ jobs:
             sudo bash -c "echo APP_PORT=${{ secrets.APP_PORT }} >> .env"
             sudo bash -c "echo API_URL=${{ secrets.API_URL }} >> .env"
             sudo bash -c "echo IMG_SERVICE_URL=${{ secrets.IMG_SERVICE_URL }} >> .env"
-            sudo pm2 restart pm2.config.js
+            pm2 restart pm2.config.js
