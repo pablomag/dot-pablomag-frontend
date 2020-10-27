@@ -1,0 +1,35 @@
+name: Deploy frontend web
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH, create .env and deploy frontend web
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_PASS }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            cd /var/www
+            sudo mkdir dot-pablomag
+            cd dot-pablomag
+            sudo git clone https://github.com/pablomag/dot-pablomag-frontend.git
+            sudo mv dot-pablomag-frontend web
+            cd web
+            sudo npm install --production --unsafe-perm
+            sudo npm install pm2 -g
+            sudo npm run build
+            sudo npm run sass
+            sudo touch .env
+            sudo bash -c "echo APP_PORT=${{ secrets.APP_PORT }} >> .env"
+            sudo bash -c "echo API_URL=${{ secrets.API_URL }} >> .env"
+            sudo bash -c "echo IMG_SERVICE_URL=${{ secrets.IMG_SERVICE_URL }} >> .env"
+            sudo pm2 start pm2.config.js
+            sudo pm2 startup systemd -u ${{ secrets.SSH_USER }}
+            sudo pm2 save
