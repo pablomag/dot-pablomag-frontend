@@ -19,9 +19,9 @@ jobs:
           script: |
             cd /var/www/dot-pablomag/web
             sudo git pull
-            sudo npm install --production --unsafe-perm
-            sudo npm run build
-            sudo npm run sass
+            sudo yarn install
+            sudo yarn build
+            sudo yarn sass
             sudo rm .env
             sudo touch .env
             sudo bash -c "echo APP_PORT=${{ secrets.APP_PORT }} >> .env"
