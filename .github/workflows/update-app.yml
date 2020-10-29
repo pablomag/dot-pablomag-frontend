@@ -19,12 +19,12 @@ jobs:
           script: |
             cd /var/www/dot-pablomag/web
             sudo git pull
-            sudo yarn install
-            sudo yarn build
-            sudo yarn sass
             sudo rm .env
             sudo touch .env
             sudo bash -c "echo APP_PORT=${{ secrets.APP_PORT }} >> .env"
-            sudo bash -c "echo API_URL=${{ secrets.API_URL }} >> .env"
-            sudo bash -c "echo IMG_SERVICE_URL=${{ secrets.IMG_SERVICE_URL }} >> .env"
+            sudo bash -c "echo REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} >> .env"
+            sudo bash -c "echo REACT_APP_IMG_SERVICE_URL=${{ secrets.REACT_APP_IMG_SERVICE_URL }} >> .env"
+            sudo yarn install
+            sudo yarn build
+            sudo yarn sass
             pm2 restart pm2.config.js
