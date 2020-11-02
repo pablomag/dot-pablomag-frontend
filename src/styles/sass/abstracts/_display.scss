@@ -5,6 +5,10 @@
     pointer-events: none;
 }
 
+.overflow-hidden {
+    overflow: hidden;
+}
+
 .hide {
     @include burger--hide();
 }

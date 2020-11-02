@@ -5,6 +5,12 @@
             "options": {
                 "tabWidth": 2
             }
+        },
+        {
+            "files": "*.*",
+            "options": {
+                "tabWidth": 4
+            }
         }
     ]
 }

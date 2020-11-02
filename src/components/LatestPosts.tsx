@@ -31,7 +31,7 @@ const LatestPosts = () => {
                 return <h1>Error while loading post</h1>;
             } else {
                 return (
-                    <main>
+                    <main className="overflow-hidden">
                         <div className="main">
                             {data.map((post: any) => (
                                 <React.Fragment key={post.slug}>
