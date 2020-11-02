@@ -26,6 +26,6 @@ jobs:
             sudo bash -c "echo REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} >> .env"
             sudo bash -c "echo REACT_APP_IMG_SERVICE_URL=${{ secrets.REACT_APP_IMG_SERVICE_URL }} >> .env"
             sudo yarn install
-            sudo yarn build
             sudo yarn sass
+            sudo yarn build
             pm2 restart pm2.config.js
