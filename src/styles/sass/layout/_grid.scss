@@ -1,5 +1,6 @@
 #root {
     min-width: $breakpoint-minimum;
+
     display: grid;
     grid-template-rows: auto auto 11em;
     grid-template-columns: 1fr;
@@ -7,14 +8,6 @@
         "header"
         "main"
         "footer";
-
-    @media (min-width: $breakpoint-mobile) {
-        grid-template-columns: 1fr 2fr 6fr 2fr 1fr;
-        grid-template-areas:
-            "header header header header header"
-            "main main main main main"
-            "footer footer footer footer footer";
-    }
 }
 
 header {
@@ -22,7 +15,6 @@ header {
 }
 
 main {
-    width: 100%;
     grid-area: main;
 }
 
@@ -42,13 +34,13 @@ footer {
         "right-sidebar"
         "comments";
 
-    @media (min-width: $breakpoint-mobile) {
+    @media (min-width: $breakpoint-desktop) {
         grid-template-rows: auto auto auto auto;
         grid-template-columns: 1fr 2fr 6fr 2fr 1fr;
         grid-template-areas:
             "hero hero hero hero hero"
             "sticky-title sticky-title sticky-title sticky-title sticky-title"
-            ". left-sidebar post-content right-sidebar ."
+            "left-sidebar left-sidebar post-content right-sidebar right-sidebar"
             ". . comments . .";
     }
 }
@@ -59,10 +51,23 @@ footer {
 
 .right-sidebar {
     grid-area: right-sidebar;
+    justify-self: center;
+
+    @media (min-width: $breakpoint-mobile) {
+        max-width: 40em;
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+        justify-self: left;
+    }
 }
 
 .left-sidebar {
     grid-area: left-sidebar;
+
+    @media (min-width: $breakpoint-desktop) {
+        justify-self: right;
+    }
 }
 
 .sticky-title {
@@ -71,18 +76,25 @@ footer {
 
 .post-content {
     grid-area: post-content;
-    padding: 0 1.5em;
+    width: calc(100vw - 4.5em);
+    justify-self: center;
 
     @media (min-width: $breakpoint-mobile) {
-        padding: 0;
+        max-width: 40em;
     }
 }
 
 .comments {
     grid-area: comments;
-    padding: 0 1.5em;
+    width: calc(100vw - 1em);
+    justify-self: center;
 
     @media (min-width: $breakpoint-mobile) {
-        padding: 0;
+        width: calc(100vw - 15%);
+        max-width: 40em;
+    }
+
+    @media (min-width: $breakpoint-mobile) {
+        width: calc(100vw - 20%);
     }
 }

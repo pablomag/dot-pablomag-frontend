@@ -1,14 +1,13 @@
 .code-block {
-    padding: 1em 2em;
-    line-height: 1em;
-    background-color: var(--clr-secondary);
-    @include font(var(--ff-code), var(--ff-body), var(--clr-light));
+    line-height: 1.2em;
+    font-family: var(--ff-code);
 }
 
 .code-block-copy {
     position: relative;
     float: right;
-    top: 0.5em;
+    top: 1.5em;
+    right: 0.5em;
     color: var(--clr-light);
     cursor: pointer;
 }
@@ -16,15 +15,15 @@
 .dynamic-tooltip {
     font-style: normal;
     float: right;
-    margin-top: -0.6em;
-    margin-right: -7.4em;
+    margin-top: -0.75em;
+    margin-right: -1em;
 }
 
 .tooltip-copied:after {
     content: var(--msg-code-copied);
     display: flex;
     opacity: 0;
-    background: rgb(44, 44, 44);
+    background: var(--clr-brand);
     width: max-content;
     height: max-content;
     letter-spacing: 0.025em;
@@ -46,7 +45,7 @@
     90% {
         opacity: 1;
         transform: scale(1);
-        background: rgb(44, 44, 44);
+        background: var(--clr-brand);
     }
     100% {
         opacity: 0;

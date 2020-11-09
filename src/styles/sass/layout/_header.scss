@@ -9,9 +9,8 @@ header {
     justify-content: space-between;
 
     @media (min-width: $breakpoint-mobile) {
-        height: 4em;
         flex-direction: row;
-        padding: 0 5%;
+        padding: 0;
     }
 
     @media (min-width: $breakpoint-desktop) {
@@ -37,6 +36,10 @@ header {
             animation: blurFadeInOut 250ms ease-in-out 500ms;
 
             @media (min-width: $breakpoint-mobile) {
+                @include font(var(--ff-pablomag), $fs-h4, var(--clr-light));
+            }
+
+            @media (min-width: $breakpoint-desktop) {
                 @include font(var(--ff-pablomag), $fs-h3, var(--clr-light));
             }
         }

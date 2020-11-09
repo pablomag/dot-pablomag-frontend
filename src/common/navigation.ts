@@ -8,17 +8,17 @@ export function initializeNavigation() {
         entries.forEach((entry) => {
             if (!entry.isIntersecting) {
                 if (
-                    burger!.classList.contains("init") ||
-                    burger!.classList.contains("hide")
+                    burger!.classList.contains("burger--init") ||
+                    burger!.classList.contains("burger--hide")
                 ) {
-                    burger!.classList.remove("init");
-                    burger!.classList.remove("hide");
-                    burger!.classList.add("show");
+                    burger!.classList.remove("burger--init");
+                    burger!.classList.remove("burger--hide");
+                    burger!.classList.add("burger--show");
                 }
             } else {
-                if (!burger!.classList.contains("init")) {
-                    burger!.classList.add("hide");
-                    burger!.classList.remove("show");
+                if (!burger!.classList.contains("burger--init")) {
+                    burger!.classList.add("burger--hide");
+                    burger!.classList.remove("burger--show");
                 }
             }
         });

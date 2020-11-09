@@ -1,19 +1,15 @@
-.init {
-    opacity: 0;
+.burger--init {
     cursor: default;
+    opacity: 0;
     user-select: none;
     pointer-events: none;
 }
 
-.overflow-hidden {
-    overflow: hidden;
-}
-
-.hide {
+.burger--hide {
     @include burger--hide();
 }
 
-.show {
+.burger--show {
     @include burger--show();
 }
 

@@ -1,9 +1,9 @@
 .right-sidebar {
     display: flex;
-    margin: 0 1.25em;
+    margin: 3em 1.5em 0;
 
     .tags-wrapper {
-        padding: 2em 0 0 0;
+        padding: 0;
 
         .sidebar-tags {
             display: inline-flex;
@@ -16,20 +16,17 @@
         }
     }
 
-    @media (min-width: $breakpoint-mobile) {
-        display: flex;
-        text-align: left;
-        padding: 2em 0.5em 0 2em;
-        margin: 0 0 1em;
-        top: 7em;
+    @media (min-width: $breakpoint-desktop) {
         position: sticky;
+        top: 6em;
+        height: fit-content;
+        margin: 0 0 0 1em;
 
         .tags-wrapper {
-            padding: 1em 0 2em 2em;
+            padding: 1em 0 0 0;
             text-align: right;
 
             .sidebar-tags {
-                margin: 0 0.15em;
                 display: inline-flex;
                 @include font(var(--ff-side), $fs-xs, var(--clr-light));
             }
@@ -40,22 +37,24 @@
 .left-sidebar {
     display: flex;
     position: sticky;
-    top: 3em;
-    height: 2em;
-    margin: 0 1.5em 0 0;
     flex-direction: column;
     align-items: flex-end;
-    z-index: 10;
+    margin: 0 1.5em;
 
     .post-date {
         display: flex;
         flex-direction: row;
+        position: relative;
+        top: -1.25em;
+        right: 1.75em;
         width: 100%;
         justify-content: flex-end;
 
         h3 {
+            padding: 0;
+            margin: 0;
             text-align: right;
-            @include font(var(--ff-side), $fs-small, var(--accent-dark));
+            @include font(var(--ff-side), $fs-small, var(--clr-accent-dark));
         }
 
         .moment-date {
@@ -64,7 +63,10 @@
     }
 
     .post-author {
-        opacity: 0;
+        display: none;
+        width: 100%;
+        margin: 2em 0 0;
+        justify-content: flex-end;
 
         .hero-profile {
             padding: 0;
@@ -74,33 +76,35 @@
                 position: relative;
                 top: -3.25em;
                 left: -4.25em;
+                text-align: right;
             }
 
             .img-wrapper {
-                text-align: right;
-                padding: 0 1em 0 0;
+                text-align: center;
+                flex-grow: 1;
+                padding: 0;
 
                 img {
-                    width: 3em;
-                    border: 0.25em solid var(--clr-secondary);
+                    width: 4em;
+                    border: 0.25em solid var(--clr-brand);
                     border-radius: 50%;
                 }
             }
 
             .hero-name {
-                margin: 0 1em 5em;
+                margin: 0;
                 text-align: center;
-                @include font(var(--ff-side), $fs-base, var(--clr-secondary));
+                @include font(var(--ff-side), $fs-base, var(--clr-brand));
                 font-weight: 600;
             }
         }
     }
 
     .post-stats {
+        display: none;
         position: relative;
         top: 2.5em;
         left: 0;
-        display: none; /* Need to fix this, was GRID but the icons are all over the place */
         grid-template-columns: 1.25em 3em 3em 2em 2em;
         grid-template-rows: 2em;
         grid-template-areas: ". comments likes bookmark facebook twitter";
@@ -143,8 +147,8 @@
             .comments-count,
             .likes-count {
                 position: relative;
-                font-weight: 600;
-                @include font(var(--ff-side), $fs-small, var(--clr-secondary));
+                font-weight: 400;
+                @include font(var(--ff-brand), $fs-base, var(--clr-brand));
             }
 
             .comments-count {
@@ -159,12 +163,12 @@
                 width: 1.5em;
                 text-align: center;
                 font-size: $fs-h5;
-                color: var(--accent-dark);
+                color: var(--clr-accent-dark);
                 padding: 0.5em 0 0.5em 0.5em;
             }
 
             .liked {
-                color: var(--clr-secondary);
+                color: var(--clr-brand);
             }
 
             .likes-count {
@@ -176,115 +180,154 @@
 
             .sidebar-icon:hover {
                 cursor: pointer;
-                color: var(--clr-secondary);
-            }
-        }
-
-        @media (min-width: $breakpoint-mobile) {
-            position: unset;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 2em 2em 2em;
-            grid-template-areas:
-                ". comments bookmark"
-                ". likes facebook"
-                ". . twitter";
-
-            .sidebar-links {
-                &__comments {
-                    grid-area: comments;
-                    text-align: right;
-
-                    .far,
-                    .fab {
-                        padding-top: 0;
-                    }
-                }
-
-                .likes-count {
-                    top: -0.05em;
-                    z-index: -1;
-                    font-style: normal;
-                }
-
-                .comments-count {
-                    top: -0.25em;
-                    z-index: -1;
-                    font-style: normal;
-                }
+                color: var(--clr-brand);
             }
         }
     }
 
     @media (min-width: $breakpoint-mobile) {
-        display: flex;
-        flex-direction: column;
-        position: sticky;
-        top: 7em;
-        height: 42em;
-        text-align: right;
-        padding: 1.3em 3em 2em;
-        margin: 0;
-        z-index: unset;
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-areas: "post-author post-date post-stats";
+        align-items: center;
+        width: 100%;
+        margin: 0 0 1em;
+        padding: 0;
 
         .post-date {
-            display: flex;
-            width: 100%;
-            justify-content: flex-end;
+            grid-area: post-date;
+            display: inline-flex;
+            top: 0;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            align-self: auto;
+            justify-content: center;
 
             h3 {
-                margin: 0;
-                @include font(var(--ff-side), $fs-base, var(--accent-dark));
+                @include font(var(--ff-side), $fs-base, var(--clr-accent-dark));
             }
         }
 
         .post-author {
-            opacity: 1;
-            display: flex;
-            width: 100%;
-            justify-content: flex-end;
+            grid-area: post-author;
+            display: inline-flex;
+            top: 0;
+            margin: 0;
+            padding: 0;
+            align-self: auto;
 
             .hero-profile {
                 padding: 0;
-                margin: 1em 0 0;
+                margin: 0;
+                height: 4em;
 
                 p {
                     text-align: right;
-                    position: initial;
+                    padding: 0 1em 0 0;
                 }
 
                 .img-wrapper {
+                    text-align: center;
+                    flex-grow: 1;
                     padding: 0;
+
                     img {
                         width: 4em;
-                        border: 0.25em solid var(--clr-secondary);
+                        border: 0.25em solid var(--clr-brand);
                         border-radius: 50%;
-                        text-align: right;
                     }
                 }
 
                 .hero-name {
-                    margin: 0 0 5em;
-                    @include font(
-                        var(--ff-side),
-                        $fs-base,
-                        var(--clr-secondary)
-                    );
+                    margin: 0;
+                    @include font(var(--ff-side), $fs-base, var(--clr-brand));
                     font-weight: 600;
                 }
             }
         }
 
         .post-stats {
-            display: block;
-            width: 100%;
+            grid-area: post-stats;
+            display: inline-flex;
+            top: 0;
             margin: 0;
+            padding: 0;
+            align-self: auto;
 
             .sidebar-links {
                 margin: 0;
+                padding: 0;
                 text-align: right;
-                height: 2.25em;
             }
+        }
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+        display: flex;
+        position: sticky;
+        flex-direction: column;
+        top: 5.6em;
+        height: fit-content;
+        padding: 0 2em 30em;
+
+        .post-date {
+            top: 1.25em;
+            justify-content: flex-end;
+        }
+
+        .post-author {
+            margin: 2em 0 0;
+            justify-content: flex-end;
+
+            .hero-profile {
+                padding: 0;
+                margin: 0;
+                height: 6em;
+
+                p {
+                    text-align: left;
+                    position: initial;
+                    padding: 0;
+                }
+            }
+        }
+
+        .post-stats {
+            flex-direction: column;
+            top: 1em;
+            align-self: flex-end;
+        }
+    }
+}
+
+.post--preview {
+    .post-date {
+        display: flex;
+        position: absolute;
+        top: 23em;
+        right: 1.75em;
+        width: 100%;
+        justify-content: flex-end;
+
+        h3 {
+            padding: 0;
+            margin: 0;
+            text-align: right;
+            @include font(var(--ff-side), $fs-small, var(--clr-accent-dark));
+        }
+
+        .moment-date {
+            margin-left: 0.5em;
+        }
+
+        @media (min-width: $breakpoint-mobile) {
+            top: 27em;
+        }
+
+        @media (min-width: $breakpoint-desktop) {
+            top: 31em;
         }
     }
 }

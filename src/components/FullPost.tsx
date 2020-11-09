@@ -4,6 +4,7 @@ import Moment from "react-moment";
 
 import { initializeStickyTitles } from "../common/stickyTitles";
 import { initializeCodeCopy } from "../common/copyToClipboard";
+import { highlightCode } from "../common/highlightCode";
 import { like } from "../common/like";
 
 //import Comments from './Comments';
@@ -106,6 +107,7 @@ const initializePost = (post: any) => {
     syncCommentCount(post);
     initializeStickyTitles();
     initializeCodeCopy();
+    highlightCode();
 };
 
 const FullPost = ({ data }: any) => {
@@ -144,7 +146,7 @@ const FullPost = ({ data }: any) => {
             <div className="comments">
                 <h1>Comments</h1>
                 <p>Comments are temporarily disabled</p>
-                {/* 
+                {/*
 					// Comments disabled temporarily
 					<Comments data={post}></Comments>
 				*/}

@@ -1,35 +1,12 @@
 .post-container--more {
     position: relative;
-    height: 80em;
-    margin-bottom: -1.75em;
-    background-image: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) 0%,
-        rgba(0, 0, 0, 0) 75%,
-        rgba(255, 255, 255, 0) 85%,
-        rgba(255, 255, 255, 1) 92%,
-        rgba(255, 255, 255, 1) 100%
-    );
-}
-
-.post-content {
-    min-height: 50vh;
-    text-align: justify;
-}
-
-.post--to-back {
-    position: relative;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 1);
+    margin-bottom: -1em;
 }
 
 .post--readmore {
     @include font(var(--ff-title), $fs-small, var(--clr-dark));
     position: relative;
-    top: -4em;
+    top: -2em;
     width: 7em;
     margin-left: auto;
     margin-right: 1.5em;
@@ -41,14 +18,10 @@
 
     @media (min-width: $breakpoint-mobile) {
         @include font(var(--ff-title), $fs-normal, var(--clr-dark));
-        margin-left: auto;
-        margin-right: 25%;
     }
 
     @media (min-width: $breakpoint-desktop) {
         @include font(var(--ff-title), $fs-normal, var(--clr-dark));
-        margin-left: auto;
-        margin-right: 25%;
     }
 
     > a {
@@ -68,12 +41,9 @@
     display: flex;
     position: sticky;
     top: 0;
-    min-height: 26em;
-    padding-right: 1.25em;
-    margin: 0 2em;
+    padding: 0;
     align-items: center;
-    justify-content: flex-end;
-    transition: all 350ms ease-in-out;
+    justify-content: space-around;
 
     @media (min-width: $breakpoint-mobile) {
         padding: 0;
@@ -82,23 +52,29 @@
     }
 
     @media (min-width: $breakpoint-desktop) {
-        padding: 0;
         margin: 0 18em;
-        justify-content: center;
+    }
+
+    h1 {
+        padding: 2em 0;
     }
 }
 
 .stuck-title {
-    z-index: 1;
     margin: 0;
-    min-height: 7.5em;
-    background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(255, 255, 255, 1) 80%,
-        rgba(255, 255, 255, 0) 85%,
-        rgba(255, 255, 255, 0) 100%
-    );
+    padding: 0.75em 1.75em 0 0;
+    background-color: var(--clr-light);
+    justify-content: flex-end;
+    z-index: 1;
+
+    @media (min-width: $breakpoint-mobile) {
+        padding: 0.75em 0 0;
+        justify-content: center;
+    }
+
+    h1 {
+        padding: 0;
+    }
 
     .post-title {
         @include post-title--tiny();
@@ -108,15 +84,16 @@
         overflow: hidden;
         text-align: right;
         width: 70vw;
-        height: 4em;
+        height: 2.25em;
         align-self: center;
-        transition: all 350ms ease-out;
+        transition: font-size 350ms ease-out;
 
         @media (min-width: $breakpoint-mobile) {
             @include post-title--small();
             width: 75vw;
-            height: 1.25em;
-            align-self: baseline;
+            height: 1.75em;
+            padding: 0;
+            justify-content: center;
         }
     }
 }
@@ -124,11 +101,14 @@
 .unstuck-title {
     .post-title {
         @include post-title--small();
-        transition: all 300ms ease-in-out;
+        transition: font-size 250ms ease-out;
 
         @media (min-width: $breakpoint-mobile) {
+            @include post-title--medium();
+        }
+
+        @media (min-width: $breakpoint-desktop) {
             @include post-title--big();
-            animation: grow-text-animation 400ms ease-out;
         }
     }
 }
@@ -157,5 +137,49 @@
     }
     100% {
         @include post-title--big();
+    }
+}
+
+.no-more-posts {
+    display: flex;
+    border-top: 0.1em solid var(--clr-accent);
+    padding: 0 2em;
+    min-height: calc(100vh / 2);
+
+    .wrapper {
+        flex-grow: 1;
+        max-width: 100vw;
+    }
+
+    h1 {
+        margin: 1em 0 -1em;
+        line-height: 2.5em;
+        @include font(var(--ff-side), $fs-h5, var(--clr-dark));
+    }
+
+    p {
+        @include font(var(--ff-notes), $fs-small, var(--clr-accent-dark));
+    }
+
+    @media (min-width: $breakpoint-mobile) {
+        justify-content: center;
+
+        .wrapper {
+            max-width: 40em;
+        }
+
+        h1 {
+            @include font(var(--ff-side), $fs-h4, var(--clr-dark));
+        }
+
+        p {
+            @include font(var(--ff-notes), $fs-small, var(--clr-accent-dark));
+        }
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+        .wrapper {
+            max-width: 50em;
+        }
     }
 }

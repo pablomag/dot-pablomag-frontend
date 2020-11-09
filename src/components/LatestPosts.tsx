@@ -52,6 +52,12 @@ const LatestPosts = () => {
                             {showMore && (
                                 <p onClick={() => dispatch({})}>Load more</p>
                             )}
+                            <div className="no-more-posts">
+                                <div className="wrapper">
+                                    <h1>Sorry...</h1>
+                                    <p>There are no more posts</p>
+                                </div>
+                            </div>
                         </div>
                     </main>
                 );
