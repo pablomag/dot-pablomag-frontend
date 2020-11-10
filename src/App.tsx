@@ -23,10 +23,7 @@ function App() {
                 <Header></Header>
 
                 <Switch>
-                    <Route
-                        path="/latest"
-                        render={() => <LatestPosts />}
-                    />
+                    <Route path="/latest" render={() => <LatestPosts />} />
                     <Route path="/post/:slug" component={SinglePost} />
                     <Route
                         path="/posts/:year?/:month?"

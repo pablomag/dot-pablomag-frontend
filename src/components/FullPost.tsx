@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ReactHtmlParser from "react-html-parser";
 import Moment from "react-moment";
 
+import { ScrollToTopOnMount } from "../common/scrollToTop";
 import { initializeStickyTitles } from "../common/stickyTitles";
 import { initializeCodeCopy } from "../common/copyToClipboard";
 import { highlightCode } from "../common/highlightCode";
@@ -49,7 +50,7 @@ const setLike = (liked: boolean) => {
     if (liked) {
         like!.classList.add("liked");
     }
-}
+};
 
 const addToBookmark = (slug: string) => {
     console.log(`[Feature not yet implemented] Adding to bookmark: ${slug}`);
@@ -73,10 +74,12 @@ const shareToFacebook = (slug: string) => {
         "Facebook share",
         "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=700,width=600"
     );
-    console.log(`[Feature is experimental] Sharing to facebook: ${facebookUrl}`);
+    console.log(
+        `[Feature is experimental] Sharing to facebook: ${facebookUrl}`
+    );
 };
 
-const syncCommentCount = ({ post } :any) => {
+const syncCommentCount = ({ post }: any) => {
     const element = document.querySelector(".disqus-comment-count");
 
     let comments = "";
@@ -120,9 +123,13 @@ const FullPost = ({ data }: any) => {
 
     return (
         <div className="post">
+            <ScrollToTopOnMount />
             <div className="hero">
                 <img
-                    src={`${IMG_SERVICE_URL}/images/${post.image}`}
+                    srcSet={`${IMG_SERVICE_URL}/images/mobile/${post.image} 720w,
+                            ${IMG_SERVICE_URL}/images/desktop/${post.image} 1920w`}
+                    sizes="(max-width: 720px) 720px, 1920px"
+                    src={`${IMG_SERVICE_URL}/images/mobile/${post.image}`}
                     alt={post.title}
                 />
             </div>
