@@ -19,9 +19,11 @@
 }
 
 .main-navigation {
+    display: none;
     @include burger--hide();
 
     @media (min-width: $breakpoint-mobile) {
+        display: flex;
         @include burger--show();
     }
 }

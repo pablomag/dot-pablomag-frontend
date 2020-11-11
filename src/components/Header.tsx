@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+
+import { ReactComponent as Logo } from "../dot-pablomag.svg";
+
 import { initializeNavigation } from "../common/navigation";
 
 import { APP_TITLE } from "../constants";
@@ -17,13 +22,8 @@ const Header = () => {
         <React.Fragment>
             <header>
                 <div className="header-title">
-                    <h1 className="header-title">
-                        <object
-                            data="/dot-pablomag.svg"
-                            type="image/svg+xml"
-                            aria-label=".pablomag"
-                            className="logo-svg"
-                        ></object>
+                    <h1>
+                        <Logo aria-label=".pablomag" className="logo-svg" />
                         {APP_TITLE}
                     </h1>
                 </div>
@@ -46,7 +46,7 @@ const Header = () => {
                     className="burger init"
                     onClick={() => handleOpenBurgerMenu()}
                 >
-                    <i className="fas fa-bars"></i>
+                    <FontAwesomeIcon icon={faBars} />
                 </div>
             </div>
         </React.Fragment>

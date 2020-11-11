@@ -21,7 +21,11 @@
         "nodemon": "^2.0.4"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.14.0",
+        "@fortawesome/fontawesome-svg-core": "^1.2.32",
+        "@fortawesome/free-brands-svg-icons": "^5.15.1",
+        "@fortawesome/free-regular-svg-icons": "^5.15.1",
+        "@fortawesome/free-solid-svg-icons": "^5.15.1",
+        "@fortawesome/react-fontawesome": "^0.1.12",
         "@types/highlight.js": "^9.12.4",
         "@types/react": "^16.9.53",
         "@types/react-dom": "^16.9.8",

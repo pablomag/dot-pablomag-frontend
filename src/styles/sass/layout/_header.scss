@@ -7,6 +7,7 @@ header {
     align-items: center;
     flex-direction: row-reverse;
     justify-content: space-between;
+    max-width: 100%;
 
     @media (min-width: $breakpoint-mobile) {
         flex-direction: row;
@@ -19,9 +20,11 @@ header {
     }
 
     .logo-svg {
-        height: 1.25em;
+        height: 1.5em;
         vertical-align: middle;
-        padding: 0 0.5em 0 0;
+        width: 2.5em;
+        padding: 0;
+        margin: 0;
         animation: blurFadeInOut 250ms ease-in-out 500ms;
     }
 

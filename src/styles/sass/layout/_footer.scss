@@ -8,12 +8,7 @@ footer {
         position: relative;
         top: 4em;
         justify-content: center;
-        align-items: baseline;
         padding: 2em 0;
-
-        @media (min-width: $breakpoint-mobile) {
-            padding: 2em 0 3em;
-        }
     }
 
     .second-paragraph {
@@ -33,26 +28,18 @@ footer {
 
     .icons {
         margin: 0;
-        padding: 0;
+        padding: 0 0.5em;
         color: var(--clr-light);
-        font-size: $fs-h4;
         display: inline-flex;
 
-        .fab {
-            padding: 0 0.3em;
+        svg {
+            font-size: $fs-h2;
+            padding: 0 0.15em;
         }
     }
 
     .powered-by {
-        margin: 0;
-        padding: 0;
-        display: inline-flex;
         @include font(var(--ff-side), $fs-xs, var(--clr-light));
-
-        p {
-            position: relative;
-            top: -0.4em;
-        }
     }
 
     .copyright {
