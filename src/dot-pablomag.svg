@@ -2,7 +2,8 @@
     <style>
         text {
             font-size: 255px;
-            font-family: "Nunito Sans ExtraBold";
+            font-family: "Nunito Sans";
+            font-weight: 800;
             fill: white;
             text-anchor: middle;
         }
