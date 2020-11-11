@@ -125,13 +125,16 @@ const FullPost = ({ data }: any) => {
         <div className="post">
             <ScrollToTopOnMount />
             <div className="hero">
-                <img
-                    srcSet={`${IMG_SERVICE_URL}/images/mobile/${post.image} 720w,
-                            ${IMG_SERVICE_URL}/images/desktop/${post.image} 1920w`}
-                    sizes="(max-width: 720px) 720px, 1920px"
-                    src={`${IMG_SERVICE_URL}/images/mobile/${post.image}`}
-                    alt={post.title}
-                />
+                <picture>
+                    <source
+                        media="(min-width: 720px)"
+                        srcSet={`${IMG_SERVICE_URL}/images/desktop/${data.image}`}
+                    />
+                    <img
+                        src={`${IMG_SERVICE_URL}/images/mobile/${data.image}`}
+                        alt={data.title}
+                    />
+                </picture>
             </div>
 
             <div className="right-sidebar">

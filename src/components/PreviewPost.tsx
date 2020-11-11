@@ -17,13 +17,16 @@ const PreviewPost = (props: { data: any }) => {
     return (
         <div className="post post--preview">
             <div className="hero">
-                <img
-                    srcSet={`${IMG_SERVICE_URL}/images/mobile/${data.image} 720w,
-                            ${IMG_SERVICE_URL}/images/desktop/${data.image} 1920w`}
-                    sizes="(max-width: 720px) 720px, 1920px"
-                    src={`${IMG_SERVICE_URL}/images/mobile/${data.image}`}
-                    alt={data.title}
-                />
+                <picture>
+                    <source
+                        media="(min-width: 720px)"
+                        srcSet={`${IMG_SERVICE_URL}/images/desktop/${data.image}`}
+                    />
+                    <img
+                        src={`${IMG_SERVICE_URL}/images/mobile/${data.image}`}
+                        alt={data.title}
+                    />
+                </picture>
             </div>
             <div className="post-date">
                 <h3>
