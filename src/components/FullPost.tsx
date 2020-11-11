@@ -128,11 +128,11 @@ const FullPost = ({ data }: any) => {
                 <picture>
                     <source
                         media="(min-width: 720px)"
-                        srcSet={`${IMG_SERVICE_URL}/images/desktop/${data.image}`}
+                        srcSet={`${IMG_SERVICE_URL}/images/desktop/${post.image}`}
                     />
                     <img
-                        src={`${IMG_SERVICE_URL}/images/mobile/${data.image}`}
-                        alt={data.title}
+                        src={`${IMG_SERVICE_URL}/images/mobile/${post.image}`}
+                        alt={post.title}
                     />
                 </picture>
             </div>
