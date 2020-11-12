@@ -5,7 +5,6 @@
 @import url("https://fonts.googleapis.com/css?family=Asap");
 @import url("https://fonts.googleapis.com/css?family=Inconsolata");
 @import url("https://fonts.googleapis.com/css?family=Coustard&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@800&display=swap");
 :root {
   --msg-code-copied: "CODE COPIED!";
   --url-img-service: "https://unsplash.it/1920"; }
@@ -55,8 +54,7 @@ code {
   --ff-body: "Fira Sans", sans-serif;
   --ff-side: "Asap", sans-serif;
   --ff-notes: "Oxygen", sans-serif;
-  --ff-code: "Inconsolata", monospace;
-  --ff-logo: "Nunito Sans ExtraBold"; }
+  --ff-code: "Inconsolata", monospace; }
 
 .burger--init {
   cursor: default;
