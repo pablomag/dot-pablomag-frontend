@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import ReactHtmlParser from "react-html-parser";
 import Moment from "react-moment";
 
@@ -8,11 +8,11 @@ import { initializeCodeCopy } from "../common/copyToClipboard";
 import { highlightCode } from "../common/highlightCode";
 import { like } from "../common/like";
 
-//import Comments from './Comments';
+import { AppReducer, types } from "../reducers/AppReducer";
+
+import Loader from "../common/loader";
 
 import { IMG_SERVICE_URL } from "../constants";
-
-import { updateCommentCount } from "../services/postService";
 
 const comment = (slug: string) => {
     console.log(`[Feature temporarily disabled] Add comment to post: ${slug}`);
@@ -61,7 +61,6 @@ const shareToTwitter = (slug: string) => {
 };
 
 const shareToFacebook = (slug: string) => {
-    // TODO: figure out how to post with title and image, maybe after we have this hosted properly
     const postUrl = `http://www.pablomag.com/post/${slug}`;
     const facebookUrl = `https://www.facebook.com/dialog/share?
 						app_id=510098482868255
@@ -79,151 +78,136 @@ const shareToFacebook = (slug: string) => {
     );
 };
 
-const syncCommentCount = ({ post }: any) => {
-    const element = document.querySelector(".disqus-comment-count");
-
-    let comments = "";
-
-    if (element !== null) {
-        let retryNumber = 0;
-
-        const interval = setInterval(() => {
-            retryNumber++;
-
-            if (comments === "" && retryNumber < 50) {
-                comments = element.innerHTML;
-            } else {
-                const commentCount = comments.split(" ", 1);
-
-                clearInterval(interval);
-
-                if (post.comments !== commentCount) {
-                    post.comments = commentCount;
-                    updateCommentCount(post._id, post.comments);
-                }
-            }
-        }, 2000);
-    }
-};
-
-const initializePost = (post: any) => {
-    syncCommentCount(post);
+const initializePost = () => {
     initializeStickyTitles();
     initializeCodeCopy();
     highlightCode();
 };
 
 const FullPost = ({ data }: any) => {
+    const [state, dispatch] = useReducer(AppReducer, {});
+
+    const { loading } = state;
+
     const { post, liked } = data;
 
     useEffect(() => {
-        initializePost(post);
+        initializePost();
         setLike(liked);
-    }, [post, liked]);
+        dispatch({ type: types.dataLoaded, dispatch });
+    }, [post, liked, dispatch]);
 
-    return (
-        <div className="post">
-            <ScrollToTopOnMount />
-            <div className="hero">
-                <picture>
-                    <source
-                        media="(min-width: 720px)"
-                        srcSet={`${IMG_SERVICE_URL}/images/desktop/${post.image}`}
-                    />
-                    <img
-                        src={`${IMG_SERVICE_URL}/images/mobile/${post.image}`}
-                        alt={post.title}
-                    />
-                </picture>
-            </div>
-
-            <div className="right-sidebar">
-                <div className="tags-wrapper">
-                    {post.tags.map((tag: any) => (
-                        <p key={tag} className="sidebar-tags">
-                            {tag}
-                        </p>
-                    ))}
+    if (loading) {
+        return (
+            <main>
+                <Loader></Loader>
+            </main>
+        );
+    } else {
+        return (
+            <div className="post">
+                <ScrollToTopOnMount />
+                <div className="hero">
+                    <picture>
+                        <source
+                            media="(min-width: 720px)"
+                            srcSet={`${IMG_SERVICE_URL}/images/desktop/${post.image}`}
+                        />
+                        <img
+                            src={`${IMG_SERVICE_URL}/images/mobile/${post.image}`}
+                            alt={post.title}
+                        />
+                    </picture>
                 </div>
-            </div>
 
-            <div className="sticky-title">
-                <h1 className="post-title">{post.title}</h1>
-            </div>
-
-            {ReactHtmlParser(post.content)}
-
-            <div className="comments">
-                <h1>Comments</h1>
-                <p>Comments are temporarily disabled</p>
-                {/*
-					// Comments disabled temporarily
-					<Comments data={post}></Comments>
-				*/}
-            </div>
-
-            <div className="left-sidebar">
-                <div className="post-date">
-                    <h3>
-                        <i className="far fa-clock clock-icon"></i>
-                        <Moment
-                            className="moment-date"
-                            locale="en"
-                            format="MMMM DD, YYYY"
-                        >
-                            {post.createdAt}
-                        </Moment>
-                    </h3>
+                <div className="right-sidebar">
+                    <div className="tags-wrapper">
+                        {post.tags.map((tag: any) => (
+                            <p key={tag} className="sidebar-tags">
+                                {tag}
+                            </p>
+                        ))}
+                    </div>
                 </div>
-                <div className="post-author">
-                    <div className="hero-profile">
-                        <div className="img-wrapper">
-                            <img
-                                src={post.author.picture}
-                                alt={post.author.name}
-                                referrerPolicy="no-referrer"
-                            />
+
+                <div className="sticky-title">
+                    <h1 className="post-title">{post.title}</h1>
+                </div>
+
+                {ReactHtmlParser(post.content)}
+
+                <div className="comments">
+                    <h1>Comments</h1>
+                    <p>Comments are temporarily disabled</p>
+                    {/*
+                        // Comments disabled temporarily
+                        <Comments data={post}></Comments>
+                    */}
+                </div>
+
+                <div className="left-sidebar">
+                    <div className="post-date">
+                        <h3>
+                            <i className="far fa-clock clock-icon"></i>
+                            <Moment
+                                className="moment-date"
+                                locale="en"
+                                format="MMMM DD, YYYY"
+                            >
+                                {post.createdAt}
+                            </Moment>
+                        </h3>
+                    </div>
+                    <div className="post-author">
+                        <div className="hero-profile">
+                            <div className="img-wrapper">
+                                <img
+                                    src={post.author.picture}
+                                    alt={post.author.name}
+                                    referrerPolicy="no-referrer"
+                                />
+                            </div>
+                            <p className="hero-name">{post.author.name}</p>
                         </div>
-                        <p className="hero-name">{post.author.name}</p>
                     </div>
-                </div>
-                <div className="post-stats">
-                    <div className="sidebar-links sidebar-links__comments">
-                        <i className="comments-count">{post.comments}</i>
-                        <i
-                            className="far fa-comment-alt sidebar-icon"
-                            onClick={() => comment(post.slug)}
-                        ></i>
-                    </div>
-                    <div className="sidebar-links sidebar-links__likes">
-                        <i className="likes-count">{post.likes}</i>
-                        <i
-                            className="far fa-thumbs-up sidebar-icon sidebar-icon-like"
-                            onClick={() => handleLike(post)}
-                        ></i>
-                    </div>
-                    <div className="sidebar-links sidebar-links__bookmark">
-                        <i
-                            className="far fa-bookmark sidebar-icon"
-                            onClick={() => addToBookmark(post.slug)}
-                        ></i>
-                    </div>
-                    <div className="sidebar-links sidebar-links__twitter">
-                        <i
-                            className="fab fa-twitter sidebar-icon"
-                            onClick={() => shareToTwitter(post.slug)}
-                        ></i>
-                    </div>
-                    <div className="sidebar-links sidebar-links__facebook">
-                        <i
-                            className="fab fa-facebook-square sidebar-icon"
-                            onClick={() => shareToFacebook(post.slug)}
-                        ></i>
+                    <div className="post-stats">
+                        <div className="sidebar-links sidebar-links__comments">
+                            <i className="comments-count">{post.comments}</i>
+                            <i
+                                className="far fa-comment-alt sidebar-icon"
+                                onClick={() => comment(post.slug)}
+                            ></i>
+                        </div>
+                        <div className="sidebar-links sidebar-links__likes">
+                            <i className="likes-count">{post.likes}</i>
+                            <i
+                                className="far fa-thumbs-up sidebar-icon sidebar-icon-like"
+                                onClick={() => handleLike(post)}
+                            ></i>
+                        </div>
+                        <div className="sidebar-links sidebar-links__bookmark">
+                            <i
+                                className="far fa-bookmark sidebar-icon"
+                                onClick={() => addToBookmark(post.slug)}
+                            ></i>
+                        </div>
+                        <div className="sidebar-links sidebar-links__twitter">
+                            <i
+                                className="fab fa-twitter sidebar-icon"
+                                onClick={() => shareToTwitter(post.slug)}
+                            ></i>
+                        </div>
+                        <div className="sidebar-links sidebar-links__facebook">
+                            <i
+                                className="fab fa-facebook-square sidebar-icon"
+                                onClick={() => shareToFacebook(post.slug)}
+                            ></i>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    }
 };
 
 export default FullPost;
