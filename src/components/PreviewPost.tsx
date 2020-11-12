@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import Moment from "react-moment";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClock } from "@fortawesome/free-solid-svg-icons";
+
 import { IMG_SERVICE_URL } from "../constants";
 
 import { initializeStickyTitles } from "../common/stickyTitles";
@@ -30,7 +33,7 @@ const PreviewPost = (props: { data: any }) => {
             </div>
             <div className="post-date">
                 <h3>
-                    <i className="far fa-clock clock-icon"></i>
+                    <FontAwesomeIcon icon={faClock} className="clock-icon" />
                     <Moment
                         className="moment-date"
                         locale="en"

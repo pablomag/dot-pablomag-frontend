@@ -518,14 +518,10 @@ main {
     grid-template-areas: ". comments likes bookmark facebook twitter"; }
     .left-sidebar .post-stats .sidebar-links {
       margin: 0;
-      text-align: right;
-      height: 2.25em; }
+      text-align: right; }
       .left-sidebar .post-stats .sidebar-links__comments {
         grid-area: comments;
         text-align: right; }
-        .left-sidebar .post-stats .sidebar-links__comments .far,
-        .left-sidebar .post-stats .sidebar-links__comments .fab {
-          padding-top: 0.65em !important; }
       .left-sidebar .post-stats .sidebar-links__likes {
         grid-area: likes;
         text-align: right; }
@@ -541,29 +537,19 @@ main {
       .left-sidebar .post-stats .sidebar-links .comments-count,
       .left-sidebar .post-stats .sidebar-links .likes-count {
         position: relative;
-        font-weight: 400;
         font-family: var(--ff-brand);
         font-size: 1.1rem;
-        color: var(--clr-brand); }
-      .left-sidebar .post-stats .sidebar-links .comments-count {
-        top: -0.15em;
-        width: 2em;
-        z-index: -1;
-        font-style: normal; }
-      .left-sidebar .post-stats .sidebar-links .far,
-      .left-sidebar .post-stats .sidebar-links .fab {
+        color: var(--clr-brand);
+        padding: 0 0.25em 0 0;
+        font-style: normal;
+        font-weight: 400; }
+      .left-sidebar .post-stats .sidebar-links .sidebar-icon {
         width: 1.5em;
         text-align: center;
         font-size: 1.25rem;
-        color: var(--clr-accent-dark);
-        padding: 0.5em 0 0.5em 0.5em; }
+        color: var(--clr-accent-dark); }
       .left-sidebar .post-stats .sidebar-links .liked {
         color: var(--clr-brand); }
-      .left-sidebar .post-stats .sidebar-links .likes-count {
-        top: 0;
-        padding: 0 0 0 0.5em;
-        z-index: -1;
-        font-style: normal; }
       .left-sidebar .post-stats .sidebar-links .sidebar-icon:hover {
         cursor: pointer;
         color: var(--clr-brand); }
@@ -626,6 +612,8 @@ main {
         padding: 0;
         align-self: auto; }
         .left-sidebar .post-stats .sidebar-links {
+          height: 3em;
+          align-self: baseline;
           margin: 0;
           padding: 0;
           text-align: right; } }

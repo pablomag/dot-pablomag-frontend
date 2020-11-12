@@ -2,6 +2,14 @@ import React, { useReducer, useEffect } from "react";
 import ReactHtmlParser from "react-html-parser";
 import Moment from "react-moment";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faBookmark,
+    faClock,
+    faCommentAlt,
+    faThumbsUp,
+} from "@fortawesome/free-solid-svg-icons";
+
 import { ScrollToTopOnMount } from "../common/scrollToTop";
 import { initializeStickyTitles } from "../common/stickyTitles";
 import { initializeCodeCopy } from "../common/copyToClipboard";
@@ -13,6 +21,7 @@ import { AppReducer, types } from "../reducers/AppReducer";
 import Loader from "../common/loader";
 
 import { IMG_SERVICE_URL } from "../constants";
+import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 
 const comment = (slug: string) => {
     console.log(`[Feature temporarily disabled] Add comment to post: ${slug}`);
@@ -139,16 +148,15 @@ const FullPost = ({ data }: any) => {
                 <div className="comments">
                     <h1>Comments</h1>
                     <p>Comments are temporarily disabled</p>
-                    {/*
-                        // Comments disabled temporarily
-                        <Comments data={post}></Comments>
-                    */}
                 </div>
 
                 <div className="left-sidebar">
                     <div className="post-date">
                         <h3>
-                            <i className="far fa-clock clock-icon"></i>
+                            <FontAwesomeIcon
+                                icon={faClock}
+                                className="clock-icon"
+                            />
                             <Moment
                                 className="moment-date"
                                 locale="en"
@@ -173,23 +181,26 @@ const FullPost = ({ data }: any) => {
                     <div className="post-stats">
                         <div className="sidebar-links sidebar-links__comments">
                             <i className="comments-count">{post.comments}</i>
-                            <i
-                                className="far fa-comment-alt sidebar-icon"
+                            <FontAwesomeIcon
+                                icon={faCommentAlt}
+                                className="sidebar-icon sidebar-icon-comment"
                                 onClick={() => comment(post.slug)}
-                            ></i>
+                            />
                         </div>
                         <div className="sidebar-links sidebar-links__likes">
                             <i className="likes-count">{post.likes}</i>
-                            <i
-                                className="far fa-thumbs-up sidebar-icon sidebar-icon-like"
+                            <FontAwesomeIcon
+                                icon={faThumbsUp}
+                                className="sidebar-icon sidebar-icon-like"
                                 onClick={() => handleLike(post)}
-                            ></i>
+                            />
                         </div>
                         <div className="sidebar-links sidebar-links__bookmark">
-                            <i
-                                className="far fa-bookmark sidebar-icon"
+                            <FontAwesomeIcon
+                                icon={faBookmark}
+                                className="sidebar-icon sidebar-icon-bookmark"
                                 onClick={() => addToBookmark(post.slug)}
-                            ></i>
+                            />
                         </div>
                         <div className="sidebar-links sidebar-links__twitter">
                             <i
@@ -198,10 +209,11 @@ const FullPost = ({ data }: any) => {
                             ></i>
                         </div>
                         <div className="sidebar-links sidebar-links__facebook">
-                            <i
-                                className="fab fa-facebook-square sidebar-icon"
+                            <FontAwesomeIcon
+                                icon={faFacebookSquare}
+                                className="sidebar-icon sidebar-icon-facebook"
                                 onClick={() => shareToFacebook(post.slug)}
-                            ></i>
+                            />
                         </div>
                     </div>
                 </div>
