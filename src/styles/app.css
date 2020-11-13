@@ -130,6 +130,9 @@ code {
 .btn--link {
   text-decoration: none; }
 
+code {
+  padding: 1em !important; }
+
 .code-block {
   line-height: 1.2em;
   font-family: var(--ff-code); }
@@ -142,10 +145,13 @@ code {
   color: var(--clr-light);
   cursor: pointer; }
 
+.copy-icon-disabled {
+  pointer-events: none; }
+
 .dynamic-tooltip {
   font-style: normal;
   float: right;
-  margin-top: -0.75em;
+  margin-top: -0.5em;
   margin-right: -1em; }
 
 .tooltip-copied:after {

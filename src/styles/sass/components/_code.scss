@@ -1,3 +1,7 @@
+code {
+    padding: 1em !important;
+}
+
 .code-block {
     line-height: 1.2em;
     font-family: var(--ff-code);
@@ -12,10 +16,14 @@
     cursor: pointer;
 }
 
+.copy-icon-disabled {
+    pointer-events: none;
+}
+
 .dynamic-tooltip {
     font-style: normal;
     float: right;
-    margin-top: -0.75em;
+    margin-top: -0.5em;
     margin-right: -1em;
 }
 

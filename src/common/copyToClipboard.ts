@@ -11,17 +11,18 @@ export function initializeCodeCopy() {
 function copyTextToClipboard(event: any) {
     const element = event.target.nextSibling;
     const text = element.innerText;
-
-    if (!navigator.clipboard) return fallbackCopyTextToClipboard(text, element);
+    if (!navigator.clipboard) {
+        return fallbackCopyTextToClipboard(text, element);
+    }
 
     showTooltip(element);
 
     navigator.clipboard.writeText(text).then(
         () => {
-            console.log("Async: Copying to clipboard was successful!");
+            console.log("Code copied");
         },
         (err) => {
-            console.error("Async: Could not copy text: ", err);
+            console.error("Couldn't copy code", err);
         }
     );
 }
